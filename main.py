@@ -10,7 +10,7 @@ from aiogram.dispatcher.filters.state import StatesGroup, State
 
 
 
-bot = Bot(token='7783210062:AAFC_H7lRdIPdcSrdbII_ETa0PY1pcTM25M')
+bot = Bot(token='YOUR TOKEN')
 storage = MemoryStorage()
 dp = Dispatcher(bot, storage=storage)
 
@@ -28,16 +28,13 @@ async def start(message: Message, state: FSMContext):
     start_command = message.text
     refferer = start_command[7:]
     print(refferer)
-    ref_link = f'https://t.me/ultra_parcer_robot?start={ID}h'
+    ref_link = f'https://t.me/your_nickaname_bot?start={ID}h'
 
     markup = InlineKeyboardMarkup()
     button = InlineKeyboardButton(text="💌 Отправить ссылку",
                                   switch_inline_query=f"🥺 Отправь мне сообщение:\n\n {ref_link}")
     markup.add(button)
 
-    # if 'h' in str(refferer):
-    #     refferer_new = str(refferer).replace('h', '')
-    #     print(refferer_new)
 
     if (not db.user_exists(message.from_user.id)):
         db.add_user(message.from_user.id)
@@ -76,7 +73,7 @@ async def cancel_action(callback_query: CallbackQuery, state: FSMContext):
     if callback_query.data == 'cancel':
         success_photo_path = 'fotos/success.jpg'
         ID = callback_query.from_user.id
-        link = f'https://t.me/ultra_parcer_robot?start={ID}h'
+        link = f'https://t.me/your_nickname_bot?start={ID}h'
         await state.finish()
         await callback_query.message.answer_photo(photo=open(success_photo_path, "rb"),
                                                   caption=f'✅❌ <b>Отпрака сообщения отменена...</b>\n\n'
