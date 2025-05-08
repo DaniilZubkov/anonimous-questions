@@ -10,17 +10,20 @@ class Database:
         self.connection = sqlite3.connect(db_file)
         self.cursor = self.connection.cursor()
 
-    # def create_users_table(self):
-    #     with self.connection:
-    #         self.cursor.execute("""
-    #             CREATE TABLE IF NOT EXISTS users (
-    #                 id INTEGER PRIMARY KEY AUTOINCREMENT,
-    #                 user_id INTEGER NOT NULL,
-    #                 nickname TEXT,
-    #                 timesub DATETIME,
-    #                 signup DATETIME
-    #             )
-    #         """)
+    def create_tables(self):
+        cursor = self.connection.cursor()
+
+        cursor.execute("""
+        CREATE TABLE IF NOT EXISTS users (
+        id INTEGER PRIMARY KEY NOT NULL,
+        user_id INTEGER NOT NULL,
+        nickname TEXT,
+        signup VARCHAR(60) DEFAULT 'setnickname',
+        sender INTEGER,
+        sender2 INTEGER
+        )""")
+
+
 
     def add_user(self, user_id):
         with self.connection:
